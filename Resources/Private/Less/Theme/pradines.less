@@ -1,0 +1,39 @@
+@titre-categories: {
+    font-family: 'Cheddar Jack';
+    border-bottom: 2px solid;
+    -webkit-border-radius: 0 0 50% 50%;
+       -moz-border-radius: 0 0 50% 50%;
+            border-radius: 0 0 50% 50%;
+    display: table;
+    padding-bottom: .75em;
+};
+.decouvrir-pradines {
+    color : pink;
+}
+.municipalite {
+    color : violet;
+}
+.jeunesse-associations {
+    color : green;
+}
+.services{
+    color : orange;
+}
+h1, h2 ,h3 , h4, h5, h6 {
+  &.decouvrir-pradines { @titre-categories(); }
+  &.municipalite { @titre-categories(); }
+  &.jeunesse-associations { @titre-categories(); }
+  &.services { @titre-categories(); }
+}
+i {
+  &.decouvrir-pradines { border: 1px solid;}
+  &.municipalite {border: 1px solid ; }
+  &.jeunesse-associations { border: 1px solid; }
+  &.services { border: 1px solid; }
+}
+.icon-box:hover {
+  & > i.decouvrir-pradines { background-color: pink;}
+  & > i.municipalite { background-color: violet; }
+  & > i.jeunesse-associations { background-color: green; }
+  & > i.services { background-color: orange; }
+}
