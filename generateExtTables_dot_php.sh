@@ -27,9 +27,10 @@ if (!is_array(\$GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][\$_EXTKEY])) {
 
 find . -iname '*.png' -exec echo "{}" \; | cut -d'/' -f 2,3,4,5,6,7,8 > list.txt
 for i in $(cat list.txt); do
-    GLYPHICON=`echo $i | cut -d'-' -f 3,4,5,6 | cut -d'.' -f 1`
-    echo "			array('$GLYPHICON', '$GLYPHICON', 'EXT:pradines/$i')," >> ext_tables.php
-
+    GLYPHICON=`echo $i | cut -d'/' -f 7 | cut -d'.' -f 1`
+    if [[ ! "$i" =~ "Resources/Private" ]]; then
+        echo "			array('$GLYPHICON', '$GLYPHICON', 'EXT:pradines/$i')," >> ext_tables.php
+    fi
 done
 
 echo "            ),
