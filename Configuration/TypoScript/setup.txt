@@ -9,3 +9,97 @@ lib.pageconfig {
         }
     }
 }
+
+########################
+### Class des titres ###
+########################
+lib.stdheader.3 {
+  headerClass {
+    cObject = COA
+    cObject {
+
+      5 = CONTENT
+      5 {
+        wrap = |
+        if.isTrue.field = categories
+        table = tt_content
+        select {
+          uidInList.field = uid
+          join = sys_category_record_mm ON tt_content.uid = sys_category_record_mm.uid_foreign JOIN sys_category ON sys_category.uid = sys_category_record_mm.uid_local
+          orderBy = sys_category.sorting
+        }
+        renderObj = TEXT
+        renderObj {
+          field = title
+          replacement {
+            10 {
+              search = / /
+              useRegExp = 1
+              replace = -
+            }
+          }
+          wrap = ||
+          case = lower
+        }
+      }
+
+      10 = TEXT
+      10 {
+        required = 1
+        noTrimWrap = |csc-header-alignment-| |
+      }
+
+      20 = TEXT
+      20 {
+        value < .5
+      }
+
+      stdWrap {
+        trim = 1
+        noTrimWrap = | class="|"|
+        required = 1
+      }
+    }
+  }
+}
+
+###########################################
+#### CTYPE: BOOTSTRAP PACKAGE TEXTICON ####
+###########################################
+tt_content.bootstrap_package_texticon <
+tt_content.bootstrap_package_texticon = COA
+tt_content.bootstrap_package_texticon {
+  5 = LOAD_REGISTER
+  5 {
+    iconCategorie {
+      cObject = COA
+      cObject {
+        10 = CONTENT
+        10 {
+          wrap = |
+          if.isTrue.field = categories
+          table = tt_content
+          select {
+            uidInList.field = uid
+            join = sys_category_record_mm ON tt_content.uid = sys_category_record_mm.uid_foreign JOIN sys_category ON sys_category.uid = sys_category_record_mm.uid_local
+            orderBy = sys_category.sorting
+          }
+          renderObj = TEXT
+          renderObj {
+            field = title
+            replacement {
+              10 {
+                search = / /
+                useRegExp = 1
+                replace = -
+              }
+            }
+            wrap = ||
+            case = lower
+          }
+        }
+      }
+    }
+  }
+  10.innerWrap = <span class="{register:iconCategorie} picon picon-| "{register:iconStyle}></span>
+}
